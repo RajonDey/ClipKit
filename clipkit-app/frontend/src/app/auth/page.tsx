@@ -133,7 +133,7 @@ export default function AuthenticationPage() {
         // console.log("Access token stored in localStorage");
 
         // Verify token was stored properly
-        const storedToken = localStorage.getItem("token");
+        // const storedToken = localStorage.getItem("token");
         // console.log(
         //   `Verified token storage: ${storedToken ? "success" : "failed"}`
         // );

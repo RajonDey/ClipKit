@@ -27,7 +27,7 @@ interface Clip {
 const initialIdeas: Idea[] = [];
 
 export default function DashboardPage() {
-  const [active, setActive] = useState("Ideas");
+  const [active] = useState("Ideas");
   const [ideas, setIdeas] = useState<Idea[]>(initialIdeas);
   const [showModal, setShowModal] = useState(false);
   const [editingIdea, setEditingIdea] = useState<Idea | null>(null);
@@ -98,7 +98,7 @@ export default function DashboardPage() {
         // console.log("Ideas fetched:", response);
 
         // Transform API data to match frontend model
-        const transformedIdeas = response.map((idea: any) => ({
+        const transformedIdeas = response.map((idea: { id: string; name: string; category?: string }) => ({
           id: idea.id,
           title: idea.name,
           description: idea.category || "No description",
@@ -332,11 +332,11 @@ export default function DashboardPage() {
 }
 
 // --- Idea Workspace Modal Component ---
-function IdeaWorkspace({ idea, onSave, onCancel }: any) {
+function IdeaWorkspace({ idea, onSave, onCancel }: { idea: Idea | null; onSave: (idea: Idea) => void; onCancel: () => void }) {
   const [title, setTitle] = useState(idea?.title || "");
   const [description, setDescription] = useState(idea?.description || "");
   const [tags, setTags] = useState<string[]>(idea?.tags || []);
-  const [clips, setClips] = useState<any[]>(idea?.clips || []);
+  const [clips, setClips] = useState<Idea['clips']>(idea?.clips || []);
   const [newClip, setNewClip] = useState("");
   const [clipType, setClipType] = useState("text");
   const [tagInput, setTagInput] = useState("");
@@ -611,6 +611,7 @@ function IdeaWorkspace({ idea, onSave, onCancel }: any) {
                 }`}
               >
                 {clip.type === "image" ? (
+                  // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={clip.content}
                     alt="clip"

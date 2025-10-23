@@ -32,7 +32,7 @@ const Editor: React.FC<EditorProps> = ({
   setEditedContent,
   showExportMenu,
   setShowExportMenu,
-  availableClips,
+  availableClips: _availableClips,
   ideaId,
   onRegenerate,
 }) => {
