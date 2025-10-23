@@ -45,7 +45,7 @@ export default function DashboardPage() {
   }
 
   const saveIdea = (ideaData: IdeaFormData) => {
-    if (ideaData.id) {
+    if (ideaData.id && ideaData.id !== "undefined") {
       setIdeas(
         ideas.map((i) => (i.id === ideaData.id ? { ...i, ...ideaData } : i))
       );
@@ -55,7 +55,6 @@ export default function DashboardPage() {
         .create({
           name: ideaData.title,
           category: ideaData.description,
-          tags: ideaData.tags,
         })
         .then((response) => {
           // Navigate to the new idea
@@ -384,7 +383,7 @@ function IdeaWorkspace({
   const handleSave = () => {
     if (!title.trim()) return;
     onSave({
-      id: idea?.id || Date.now().toString(),
+      id: idea?.id || undefined, // Don't generate ID for new ideas
       title,
       description,
       tags,
