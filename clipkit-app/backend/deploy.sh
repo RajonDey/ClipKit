@@ -11,6 +11,4 @@ pip install -r requirements.txt
 echo "Running database migrations..."
 alembic upgrade head
 
-# Start the application
-echo "Starting application..."
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
+echo "Deployment script completed successfully!"
