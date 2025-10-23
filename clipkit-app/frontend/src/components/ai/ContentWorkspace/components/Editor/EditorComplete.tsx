@@ -32,7 +32,7 @@ const Editor: React.FC<EditorProps> = ({
   setEditedContent,
   showExportMenu,
   setShowExportMenu,
-  availableClips: _availableClips,
+  availableClips: _availableClips, // eslint-disable-line @typescript-eslint/no-unused-vars
   ideaId,
   onRegenerate,
 }) => {

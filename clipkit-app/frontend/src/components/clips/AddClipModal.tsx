@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ClipType, ContentTypeOption } from "@/types/idea";
-import { buttonStyles, inputStyles } from "@/styles/tokens";
+import { inputStyles } from "@/styles/tokens";
 import {
   isYouTubeUrl,
   extractYouTubeVideoId,
@@ -43,7 +43,7 @@ export const AddClipModal: React.FC<AddClipModalProps> = ({
   const [codeLanguage, setCodeLanguage] = useState("js");
 
   // For image preview validation
-  const [isImageValid, setIsImageValid] = useState(false);
+  // const [isImageValid, setIsImageValid] = useState(false);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 

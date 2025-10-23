@@ -78,7 +78,7 @@ api.interceptors.request.use((config) => {
             parts.length
           );
         } else {
-          const header = JSON.parse(atob(parts[0]));
+          // const header = JSON.parse(atob(parts[0]));
           const payload = JSON.parse(atob(parts[1]));
           // console.log("Token header:", header);
           // console.log("Token payload:", payload);

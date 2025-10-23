@@ -154,7 +154,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         }
 
         // Verify the token was set correctly
-        const storedToken = localStorage.getItem("token");
+        // const storedToken = localStorage.getItem("token");
         // console.log(
         //   "Verified stored token:",
         //   storedToken ? storedToken.substring(0, 15) + "..." : "null"

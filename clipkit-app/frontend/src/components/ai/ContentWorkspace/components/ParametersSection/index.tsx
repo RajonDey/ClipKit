@@ -1,6 +1,6 @@
 import React from "react";
 import { buttonStyles, inputStyles } from "@/styles/tokens";
-import ContentTypeSelector from "./ContentTypeSelector";
+// import ContentTypeSelector from "./ContentTypeSelector";
 
 interface ContentGenerationParams {
   contentType: ContentType;
