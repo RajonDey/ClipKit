@@ -42,10 +42,8 @@ const nextConfig: NextConfig = {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
 
-  // Experimental features
-  experimental: {
-    serverComponentsExternalPackages: ["@prisma/client"],
-  },
+  // External packages for server components
+  serverExternalPackages: ["@prisma/client"],
 };
 
 export default nextConfig;

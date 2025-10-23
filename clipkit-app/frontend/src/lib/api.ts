@@ -173,6 +173,7 @@ interface ContentGenerationRequest {
   content_type: string;
   tone: string;
   length: string;
+  custom_instructions?: string;
 }
 
 interface IdeaCreateData {

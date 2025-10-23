@@ -42,8 +42,7 @@ export const AddClipModal: React.FC<AddClipModalProps> = ({
   const [tag, setTag] = useState("");
   const [codeLanguage, setCodeLanguage] = useState("js");
 
-  // For image preview validation
-  // const [isImageValid, setIsImageValid] = useState(false);
+  // For image preview validation - removed unused state
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -71,15 +70,12 @@ export const AddClipModal: React.FC<AddClipModalProps> = ({
     // Validate image URL when in image tab
     if (activeTab === "image") {
       try {
-        // Only set valid if it's a non-empty URL
+        // Only validate if it's a non-empty URL
         if (value.trim()) {
           new URL(value); // This will throw if invalid
-          setIsImageValid(true);
-        } else {
-          setIsImageValid(false);
         }
       } catch {
-        setIsImageValid(false);
+        // URL is invalid, but we don't need to track state
       }
     }
   };
@@ -222,7 +218,6 @@ export const AddClipModal: React.FC<AddClipModalProps> = ({
                     fill
                     style={{ objectFit: "contain" }}
                     onError={() => {
-                      setIsImageValid(false);
                       // We won't see this error unless there's an actual problem loading the image
                       console.error("Failed to load image preview");
                     }}

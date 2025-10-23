@@ -7,21 +7,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import { Button } from "@/components/ui/button";
 import * as api from "@/lib/api";
 import axios from "axios";
-
-// Define types
-interface Idea {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  clips: Clip[];
-}
-
-interface Clip {
-  id: number;
-  type: string;
-  content: string;
-}
+import { Clip, Idea, ClipType } from "@/types/idea";
 
 // Empty initial state - will be populated from API
 const initialIdeas: Idea[] = [];
@@ -98,7 +84,7 @@ export default function DashboardPage() {
         // console.log("Ideas fetched:", response);
 
         // Transform API data to match frontend model
-        const transformedIdeas = response.map((idea: { id: string; name: string; category?: string }) => ({
+        const transformedIdeas = response.map((idea: { id: string; name: string; category?: string; tags?: string[] }) => ({
           id: idea.id,
           title: idea.name,
           description: idea.category || "No description",
@@ -336,9 +322,9 @@ function IdeaWorkspace({ idea, onSave, onCancel }: { idea: Idea | null; onSave: 
   const [title, setTitle] = useState(idea?.title || "");
   const [description, setDescription] = useState(idea?.description || "");
   const [tags, setTags] = useState<string[]>(idea?.tags || []);
-  const [clips, setClips] = useState<Idea['clips']>(idea?.clips || []);
+  const [clips, setClips] = useState<Clip[]>(idea?.clips || []);
   const [newClip, setNewClip] = useState("");
-  const [clipType, setClipType] = useState("text");
+  const [clipType, setClipType] = useState<ClipType>("text");
   const [tagInput, setTagInput] = useState("");
   const [codeLang, setCodeLang] = useState("js");
   const contentTypes = [
@@ -362,15 +348,17 @@ function IdeaWorkspace({ idea, onSave, onCancel }: { idea: Idea | null; onSave: 
     setClips([
       ...clips,
       {
-        id: Date.now(),
+        id: Date.now().toString(),
         type: clipType,
         content: newClip,
+        created: new Date().toISOString(),
+        tags: [],
         lang: clipType === "code" ? codeLang : undefined,
       },
     ]);
     setNewClip("");
   };
-  const removeClip = (id: number) => setClips(clips.filter((c) => c.id !== id));
+  const removeClip = (id: string) => setClips(clips.filter((c) => c.id !== id));
   const addTag = () => {
     if (!tagInput.trim() || tags.includes(tagInput.trim())) return;
     setTags([...tags, tagInput.trim()]);
@@ -381,7 +369,7 @@ function IdeaWorkspace({ idea, onSave, onCancel }: { idea: Idea | null; onSave: 
   const handleSave = () => {
     if (!title.trim()) return;
     onSave({
-      id: idea?.id,
+      id: idea?.id || Date.now().toString(),
       title,
       description,
       tags,
@@ -472,7 +460,7 @@ function IdeaWorkspace({ idea, onSave, onCancel }: { idea: Idea | null; onSave: 
           <select
             className="border border-neutral-200 rounded-md px-2 py-1 text-sm bg-white text-neutral-800 focus:ring-1 focus:ring-orange-200 focus:border-orange-400 outline-none shadow-sm"
             value={clipType}
-            onChange={(e) => setClipType(e.target.value)}
+            onChange={(e) => setClipType(e.target.value as ClipType)}
           >
             {contentTypes.map((type) => (
               <option key={type.value} value={type.value}>
