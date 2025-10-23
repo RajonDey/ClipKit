@@ -37,6 +37,9 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 # Function to hash password
 def get_password_hash(password: str) -> str:
+    # Truncate password to 72 bytes to avoid bcrypt limitation
+    if len(password.encode('utf-8')) > 72:
+        password = password[:72]
     return pwd_context.hash(password)
 
 # Function to create access token
