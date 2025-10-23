@@ -84,13 +84,20 @@ export default function DashboardPage() {
         // console.log("Ideas fetched:", response);
 
         // Transform API data to match frontend model
-        const transformedIdeas = response.map((idea: { id: string; name: string; category?: string; tags?: string[] }) => ({
-          id: idea.id,
-          title: idea.name,
-          description: idea.category || "No description",
-          tags: idea.tags || [],
-          clips: [], // We'll show clip count later
-        }));
+        const transformedIdeas = response.map(
+          (idea: {
+            id: string;
+            name: string;
+            category?: string;
+            tags?: string[];
+          }) => ({
+            id: idea.id,
+            title: idea.name,
+            description: idea.category || "No description",
+            tags: idea.tags || [],
+            clips: [], // We'll show clip count later
+          })
+        );
 
         setIdeas(transformedIdeas);
         setError(null);
@@ -318,7 +325,15 @@ export default function DashboardPage() {
 }
 
 // --- Idea Workspace Modal Component ---
-function IdeaWorkspace({ idea, onSave, onCancel }: { idea: Idea | null; onSave: (idea: Idea) => void; onCancel: () => void }) {
+function IdeaWorkspace({
+  idea,
+  onSave,
+  onCancel,
+}: {
+  idea: Idea | null;
+  onSave: (idea: Idea) => void;
+  onCancel: () => void;
+}) {
   const [title, setTitle] = useState(idea?.title || "");
   const [description, setDescription] = useState(idea?.description || "");
   const [tags, setTags] = useState<string[]>(idea?.tags || []);
