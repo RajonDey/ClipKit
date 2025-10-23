@@ -368,13 +368,13 @@ export const AddClipModal: React.FC<AddClipModalProps> = ({
   };
 
   // Add keyboard shortcut for quick submission
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
-    // Ctrl+Enter or Cmd+Enter to submit
-    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-      e.preventDefault();
-      handleSubmit(e as unknown as React.FormEvent);
-    }
-  };
+  // const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+  //   // Ctrl+Enter or Cmd+Enter to submit
+  //   if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+  //     e.preventDefault();
+  //     handleSubmit(e as unknown as React.FormEvent);
+  //   }
+  // };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
