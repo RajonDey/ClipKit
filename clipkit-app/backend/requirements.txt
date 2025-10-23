@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic[email]
+python-multipart
+python-dotenv
+alembic
+python-jose[cryptography]
+passlib[bcrypt]
+email-validator 
+httpx
+psycopg2-binary
+stripe
+redis
+celery
+sentry-sdk[fastapi]
