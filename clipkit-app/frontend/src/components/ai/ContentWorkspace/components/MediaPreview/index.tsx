@@ -47,8 +47,8 @@ const MediaPreview: React.FC<MediaPreviewProps> = ({ clip, onClose }) => {
 
         <div className="flex flex-col items-center">
           {clip.type === "image" ? (
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={clip.content}
               alt="Preview"
               className="max-w-full max-h-[70vh] object-contain"
