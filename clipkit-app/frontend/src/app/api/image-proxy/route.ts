@@ -1,15 +1,13 @@
 import { NextRequest } from "next/server";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 /**
  * This API route serves as a proxy for images from any domain
  * It allows displaying images in the Next.js Image component without having to
  * add every possible domain to the Next.js config
  */
-export default async function handler(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const imageUrl = searchParams.get("url");
 
